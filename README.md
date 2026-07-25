@@ -29,7 +29,7 @@ Antes de empezar, asegúrate de tener instalado:
 ### 1. Clonar el repositorio
 Abre tu terminal y ejecuta:
 ```bash
-git clone [https://github.com/CrisOrtiz/bookstore_tarea_1.2_MCDIA_Modulo_4.git](https://github.com/CrisOrtiz/bookstore_tarea_1.2_MCDIA_Modulo_4.git)
+git clone https://github.com/CrisOrtiz/bookstore_tarea_1.2_MCDIA_Modulo_4.git
 cd bookstore_tarea_1.2_MCDIA_Modulo_4 
 ```
 ### 2. Abrir el proyecto

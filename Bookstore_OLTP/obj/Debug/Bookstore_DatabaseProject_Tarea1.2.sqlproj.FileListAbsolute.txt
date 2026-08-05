@@ -1,0 +1,6 @@
+B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\bin\Debug\Bookstore_DatabaseProject_Tarea1.2.dacpac
+B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\bin\Debug\Bookstore_DatabaseProject_Tarea1.2.dll
+B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\bin\Debug\Bookstore_DatabaseProject_Tarea1.2.pdb
+B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\obj\Debug\Bookstore_DatabaseProject_Tarea1.2.sqlproj.AssemblyReference.cache
+B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\obj\Debug\Bookstore_DatabaseProject_Tarea1.2.dll
+B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\obj\Debug\Bookstore_DatabaseProject_Tarea1.2.pdb

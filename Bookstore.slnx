@@ -1,4 +1,8 @@
 <Solution>
+  <Project Path="Bookstore_DW/Bookstore_DW.sqlproj" Id="c3688565-f394-402f-aac9-23732fc0cd14">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="Bookstore_OLTP/Bookstore.sqlproj" Id="4c082165-b022-4195-bc85-613188fe2d72">
     <Build />
     <Deploy />

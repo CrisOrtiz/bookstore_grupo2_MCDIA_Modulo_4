@@ -1,0 +1,50 @@
+﻿** Aspectos destacados
+     Tablas que se volverán a crear con los datos migrados
+       Ninguno
+     Índices clúster que se van a quitar
+       Ninguno
+     Índices clúster que se van a crear
+       Ninguno
+     Posibles incidencias de datos
+       Ninguno
+
+** Acciones del usuario
+     Crear
+       [dbo].[address] (Tabla)
+       [dbo].[address_status] (Tabla)
+       [dbo].[author] (Tabla)
+       [dbo].[book] (Tabla)
+       [dbo].[book_author] (Tabla)
+       [dbo].[book_language] (Tabla)
+       [dbo].[country] (Tabla)
+       [dbo].[cust_order] (Tabla)
+       [dbo].[customer] (Tabla)
+       [dbo].[customer_address] (Tabla)
+       [dbo].[order_history] (Tabla)
+       [dbo].[order_line] (Tabla)
+       [dbo].[order_status] (Tabla)
+       [dbo].[publisher] (Tabla)
+       [dbo].[shipping_method] (Tabla)
+       [dbo].[fk_addr_ctry] (Clave externa)
+       [dbo].[fk_book_lang] (Clave externa)
+       [dbo].[fk_book_pub] (Clave externa)
+       [dbo].[fk_ba_author] (Clave externa)
+       [dbo].[fk_ba_book] (Clave externa)
+       [dbo].[fk_order_addr] (Clave externa)
+       [dbo].[fk_order_cust] (Clave externa)
+       [dbo].[fk_order_ship] (Clave externa)
+       [dbo].[fk_ca_addr] (Clave externa)
+       [dbo].[fk_ca_cust] (Clave externa)
+       [dbo].[fk_customer_address_addres_status_id] (Clave externa)
+       [dbo].[fk_oh_order] (Clave externa)
+       [dbo].[fk_oh_status] (Clave externa)
+       [dbo].[fk_ol_book] (Clave externa)
+       [dbo].[fk_ol_order] (Clave externa)
+       [dbo].[GetAddressChangesByRowVersion] (Procedimiento)
+       [dbo].[GetBookChangesByRowVersion] (Procedimiento)
+       [dbo].[GetCustomerChangesByRowVersion] (Procedimiento)
+       [dbo].[GetShippingMethodChangesByRowVersion] (Procedimiento)
+     Modificar
+       [dbo].[GetDatabaseRowVersion] (Procedimiento)
+
+** Acciones de compatibilidad

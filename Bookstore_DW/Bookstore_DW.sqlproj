@@ -61,6 +61,8 @@
     <Folder Include="Schema\Tables" />
     <Folder Include="Schema\Tables\dbo" />
     <Folder Include="Schema\Tables\staging" />
+    <Folder Include="Schema\Programability" />
+    <Folder Include="Schema\Programability\Stored procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\Security\staging.sql" />
@@ -74,5 +76,10 @@
     <Build Include="Schema\Tables\staging\staging.customer.sql" />
     <Build Include="Schema\Tables\staging\staging.order.sql" />
     <Build Include="Schema\Tables\staging\staging.shipping_method.sql" />
+    <Build Include="Schema\Programability\Stored procedures\LoadBookstoreDW.sql" />
+    <Build Include="Schema\Programability\Stored procedures\LoadDimBook.sql" />
+    <Build Include="Schema\Programability\Stored procedures\LoadDimCustomer.sql" />
+    <Build Include="Schema\Programability\Stored procedures\LoadDimShippingMethod.sql" />
+    <Build Include="Schema\Programability\Stored procedures\LoadFactOrders.sql" />
   </ItemGroup>
 </Project>

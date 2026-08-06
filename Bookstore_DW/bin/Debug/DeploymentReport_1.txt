@@ -1,0 +1,39 @@
+﻿** Aspectos destacados
+     Tablas que se volverán a crear con los datos migrados
+       Ninguno
+     Índices clúster que se van a quitar
+       Ninguno
+     Índices clúster que se van a crear
+       Ninguno
+     Posibles incidencias de datos
+       Ninguno
+
+** Acciones del usuario
+     Crear
+       [staging] (Esquema)
+       [staging].[shipping_method] (Tabla)
+       [staging].[order] (Tabla)
+       [staging].[customer] (Tabla)
+       [staging].[book] (Tabla)
+       [dbo].[DimBook] (Tabla)
+       [dbo].[DimCustomer] (Tabla)
+       [dbo].[DimDate] (Tabla)
+       [dbo].[DimShippingMethod] (Tabla)
+       [dbo].[FactOrders] (Tabla)
+       [dbo].[PackageConfig] (Tabla)
+       Restricción DEFAULT: restricción sin nombre en [staging].[shipping_method] (Restricción DEFAULT)
+       Restricción DEFAULT: restricción sin nombre en [staging].[order] (Restricción DEFAULT)
+       Restricción DEFAULT: restricción sin nombre en [staging].[customer] (Restricción DEFAULT)
+       Restricción DEFAULT: restricción sin nombre en [staging].[book] (Restricción DEFAULT)
+       Restricción DEFAULT: restricción sin nombre en [dbo].[FactOrders] (Restricción DEFAULT)
+       [dbo].[fk_fo_date] (Clave externa)
+       [dbo].[fk_fo_customer] (Clave externa)
+       [dbo].[fk_fo_book] (Clave externa)
+       [dbo].[fk_fo_shipmethod] (Clave externa)
+       [dbo].[LoadDimBook] (Procedimiento)
+       [dbo].[LoadDimCustomer] (Procedimiento)
+       [dbo].[LoadDimShippingMethod] (Procedimiento)
+       [dbo].[LoadFactOrders] (Procedimiento)
+       [dbo].[LoadBookstoreDW] (Procedimiento)
+
+** Acciones de compatibilidad

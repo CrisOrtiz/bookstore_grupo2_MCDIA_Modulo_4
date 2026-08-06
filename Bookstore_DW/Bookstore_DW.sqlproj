@@ -82,4 +82,7 @@
     <Build Include="Schema\Programability\Stored procedures\LoadDimShippingMethod.sql" />
     <Build Include="Schema\Programability\Stored procedures\LoadFactOrders.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
 </Project>

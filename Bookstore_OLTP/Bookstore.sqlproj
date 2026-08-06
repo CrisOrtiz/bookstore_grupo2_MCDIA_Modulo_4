@@ -83,5 +83,6 @@
     <Build Include="dbo\Stored Procedures\GetCustomerChangesByRowVersion.sql" />
     <Build Include="dbo\Stored Procedures\GetBookChangesByRowVersion.sql" />
     <Build Include="dbo\Stored Procedures\GetAddressChangesByRowVersion.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrderChangesByRowVersion.sql" />
   </ItemGroup>
 </Project>

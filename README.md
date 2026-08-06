@@ -10,12 +10,6 @@
 
 ---
 
-## Diagrama de la Base de Datos Bookstore
-
-<img width="1000" height="550" alt="Bookstore_diagram" src="https://github.com/user-attachments/assets/402c1cc9-ff19-4af0-8437-18de0a7f0402" />
-
----
-
 ## Requisitos Previos
 
 Antes de empezar, asegúrate de tener instalado:

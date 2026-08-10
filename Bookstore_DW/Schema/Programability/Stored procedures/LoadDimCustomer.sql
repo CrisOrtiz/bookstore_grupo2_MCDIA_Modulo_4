@@ -3,8 +3,10 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    MERGE [dbo].[DimCustomer] AS target
-    USING (
+    -- staging.customer puede traer mas de una fila por customer_id
+    -- un cliente puede tener varias direcciones en customer_address.
+    -- Nos quedamos con una sola fila por cliente antes del MERGE.
+    ;WITH dedup AS (
         SELECT
             [customer_id],
             [first_name],
@@ -15,8 +17,21 @@ BEGIN
             [street_name],
             [city],
             [address_status],
-            [country_name]
+            [country_name],
+            ROW_NUMBER() OVER (
+                PARTITION BY [customer_id]
+                ORDER BY
+                    CASE WHEN [address_status] = 'Active' THEN 0 ELSE 1 END,
+                    [staging_load_date] DESC
+            ) AS rn
         FROM [staging].[customer]
+    )
+    MERGE [dbo].[DimCustomer] AS target
+    USING (
+        SELECT [customer_id], [first_name], [last_name], [full_name], [email],
+               [street_number], [street_name], [city], [address_status], [country_name]
+        FROM dedup
+        WHERE rn = 1
     ) AS source
     ON  target.[CustomerID] = source.[customer_id]
     WHEN MATCHED THEN

@@ -14,7 +14,7 @@ BEGIN
 	  ,a.city
 	  ,adds.address_status
 	  ,co.country_name
-  FROM [Bookstore].[dbo].[customer] c
+  FROM [dbo].[customer] c
   JOIN [dbo].[customer_address] ca ON (c.customer_id = ca.customer_id)
   JOIN [dbo].[address_status] adds ON (ca.status_id = adds.status_id)
   JOIN [dbo].[address] a ON (ca.address_id = a.address_id)

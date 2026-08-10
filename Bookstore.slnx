@@ -1,9 +1,20 @@
 <Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Development" />
+    <BuildType Name="Release" />
+  </Configurations>
   <Project Path="Bookstore_DW/Bookstore_DW.sqlproj" Id="c3688565-f394-402f-aac9-23732fc0cd14">
+    <BuildType Solution="Development|*" Project="Release" />
     <Build />
     <Deploy />
   </Project>
+  <Project Path="Bookstore_ETL/Bookstore_ETL.dtproj" Type="c9674dcb-5085-4a16-b785-4c70dd1589bd">
+    <BuildType Project="Development" />
+    <Platform Project="?" />
+  </Project>
   <Project Path="Bookstore_OLTP/Bookstore.sqlproj" Id="4c082165-b022-4195-bc85-613188fe2d72">
+    <BuildType Solution="Development|*" Project="Release" />
     <Build />
     <Deploy />
   </Project>

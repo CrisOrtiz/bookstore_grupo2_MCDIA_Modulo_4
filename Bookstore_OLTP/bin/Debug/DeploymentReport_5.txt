@@ -1,0 +1,50 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[address] (Table)
+       [dbo].[address_status] (Table)
+       [dbo].[author] (Table)
+       [dbo].[book] (Table)
+       [dbo].[book_author] (Table)
+       [dbo].[book_language] (Table)
+       [dbo].[country] (Table)
+       [dbo].[cust_order] (Table)
+       [dbo].[customer] (Table)
+       [dbo].[customer_address] (Table)
+       [dbo].[order_history] (Table)
+       [dbo].[order_line] (Table)
+       [dbo].[order_status] (Table)
+       [dbo].[publisher] (Table)
+       [dbo].[shipping_method] (Table)
+       [dbo].[fk_addr_ctry] (Foreign Key)
+       [dbo].[fk_book_lang] (Foreign Key)
+       [dbo].[fk_book_pub] (Foreign Key)
+       [dbo].[fk_ba_author] (Foreign Key)
+       [dbo].[fk_ba_book] (Foreign Key)
+       [dbo].[fk_order_addr] (Foreign Key)
+       [dbo].[fk_order_cust] (Foreign Key)
+       [dbo].[fk_order_ship] (Foreign Key)
+       [dbo].[fk_ca_addr] (Foreign Key)
+       [dbo].[fk_ca_cust] (Foreign Key)
+       [dbo].[fk_customer_address_addres_status_id] (Foreign Key)
+       [dbo].[fk_oh_order] (Foreign Key)
+       [dbo].[fk_oh_status] (Foreign Key)
+       [dbo].[fk_ol_book] (Foreign Key)
+       [dbo].[fk_ol_order] (Foreign Key)
+       [dbo].[GetAddressChangesByRowVersion] (Procedure)
+       [dbo].[GetBookChangesByRowVersion] (Procedure)
+       [dbo].[GetCustomerChangesByRowVersion] (Procedure)
+       [dbo].[GetDatabaseRowVersion] (Procedure)
+       [dbo].[GetOrderChangesByRowVersion] (Procedure)
+       [dbo].[GetShippingMethodChangesByRowVersion] (Procedure)
+
+** Supporting actions

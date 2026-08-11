@@ -1,0 +1,39 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [staging] (Schema)
+       [staging].[shipping_method] (Table)
+       [staging].[order] (Table)
+       [staging].[customer] (Table)
+       [staging].[book] (Table)
+       [dbo].[DimBook] (Table)
+       [dbo].[DimCustomer] (Table)
+       [dbo].[DimDate] (Table)
+       [dbo].[DimShippingMethod] (Table)
+       [dbo].[FactOrders] (Table)
+       [dbo].[PackageConfig] (Table)
+       Default Constraint: unnamed constraint on [staging].[shipping_method] (Default Constraint)
+       Default Constraint: unnamed constraint on [staging].[order] (Default Constraint)
+       Default Constraint: unnamed constraint on [staging].[customer] (Default Constraint)
+       Default Constraint: unnamed constraint on [staging].[book] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[FactOrders] (Default Constraint)
+       [dbo].[fk_fo_date] (Foreign Key)
+       [dbo].[fk_fo_customer] (Foreign Key)
+       [dbo].[fk_fo_book] (Foreign Key)
+       [dbo].[fk_fo_shipmethod] (Foreign Key)
+       [dbo].[LoadDimBook] (Procedure)
+       [dbo].[LoadDimCustomer] (Procedure)
+       [dbo].[LoadDimShippingMethod] (Procedure)
+       [dbo].[LoadFactOrders] (Procedure)
+       [dbo].[LoadBookstoreDW] (Procedure)
+
+** Supporting actions

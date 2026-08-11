@@ -7,6 +7,6 @@
     <DTS:ConnectionManager
       DTS:ConnectRetryCount="1"
       DTS:ConnectRetryInterval="5"
-      DTS:ConnectionString="Data Source=CrisPC;Initial Catalog=Bookstore_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{57C269E3-4DD7-4032-A3FC-C87B62EA6030}CrisPC.Bookstore_OLTP;Auto Translate=False;" />
+      DTS:ConnectionString="Data Source=DESKTOP-2G3SQHI\SQLSERVER2025;Initial Catalog=Bookstore_OLTP;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-{57C269E3-4DD7-4032-A3FC-C87B62EA6030}CrisPC.Bookstore_OLTP;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

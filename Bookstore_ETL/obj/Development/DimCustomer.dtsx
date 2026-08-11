@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="DimCustomer"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{52AD17FD-71E7-410C-823E-22D0B2E354B8}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{41F80E65-1A9A-4A3C-A83C-18B5C0D357CC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -751,55 +751,67 @@
       DTS:To="Package\Actualizar Watermark" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
-<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
-<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
   Version="8">
-  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="172.981132075472,41.6603773584906"
+          Size="172.8,41.6"
           Id="Package\Actualizar Watermark"
           TopLeft="369.99999448657,511.999992370606" />
         <NodeLayout
-          Size="212.830188679246,41.6603773584906"
+          Size="212.8,41.6"
           Id="Package\DFT Cargar Staging Customer"
           TopLeft="341.999994903803,340.999994918704" />
         <NodeLayout
-          Size="173.886792452831,41.6603773584906"
+          Size="173.6,41.6"
           Id="Package\EXEC LoadDimCustomer"
           TopLeft="368.999994501471,427.999993622303" />
         <NodeLayout
-          Size="165.735849056604,41.6603773584906"
+          Size="165.6,41.6"
           Id="Package\Leer RowVersion Actual"
           TopLeft="364.999994561076,180.99999730289" />
         <NodeLayout
-          Size="165.735849056604,41.6603773584906"
+          Size="152.8,41.6"
           Id="Package\Leer Watermark"
           TopLeft="361.499994695187,94.4999986737967" />
         <NodeLayout
-          Size="165.735849056604,41.6603773584906"
+          Size="165.6,41.6"
           Id="Package\Truncar Staging Customer"
           TopLeft="366.999994531274,259.999996125698" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="446.117919156433,136.160376032287">
+          TopLeft="437.899994695187,136.099998673797">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,44.8396212706025"
+              EndConnector="9.89999986588896,44.8999986290933"
               Start="0,0"
-              End="0,37.3396212706025">
+              End="9.89999986588896,37.3999986290933">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,37.3396212706025" />
+                    End="0,18.4499993145466" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.4499993145466"
+                    Point2="0,22.4499993145466"
+                    Point3="4,22.4499993145466" />
+                  <mssgle:LineSegment
+                    End="5.89999986588896,22.4499993145466" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.89999986588896,22.4499993145466"
+                    Point2="9.89999986588896,22.4499993145466"
+                    Point3="9.89999986588896,26.4499993145466" />
+                  <mssgle:LineSegment
+                    End="9.89999986588896,37.3999986290933" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

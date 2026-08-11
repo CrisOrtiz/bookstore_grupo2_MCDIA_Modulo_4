@@ -8,3 +8,9 @@ B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGE
 B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\Bookstore_OLTP\obj\Debug\refactor.xml
 B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\Bookstore_OLTP\obj\Debug\postdeploy.sql
 B:\Cris_Docs\POST GRADO\School of Engineering de la UAGRM\MODULO 4 - DATA MANAGEMENT AND BUSINESS INTELLIGENCE\bookstore_tarea_1.2_MCDIA_Modulo_4\Bookstore_OLTP\obj\Debug\predeploy.sql
+D:\BI Oliver\maestria\Data Management AND bussiness Intelligence\bookstore_grupo2_MCDIA_Modulo_4\Bookstore_OLTP\bin\Debug\Bookstore.dacpac
+D:\BI Oliver\maestria\Data Management AND bussiness Intelligence\bookstore_grupo2_MCDIA_Modulo_4\Bookstore_OLTP\bin\Debug\Bookstore_DatabaseProject_Tarea1.2.dll
+D:\BI Oliver\maestria\Data Management AND bussiness Intelligence\bookstore_grupo2_MCDIA_Modulo_4\Bookstore_OLTP\bin\Debug\Bookstore_DatabaseProject_Tarea1.2.pdb
+D:\BI Oliver\maestria\Data Management AND bussiness Intelligence\bookstore_grupo2_MCDIA_Modulo_4\Bookstore_OLTP\obj\Debug\Bookstore.sqlproj.AssemblyReference.cache
+D:\BI Oliver\maestria\Data Management AND bussiness Intelligence\bookstore_grupo2_MCDIA_Modulo_4\Bookstore_OLTP\obj\Debug\Bookstore_DatabaseProject_Tarea1.2.dll
+D:\BI Oliver\maestria\Data Management AND bussiness Intelligence\bookstore_grupo2_MCDIA_Modulo_4\Bookstore_OLTP\obj\Debug\Bookstore_DatabaseProject_Tarea1.2.pdb

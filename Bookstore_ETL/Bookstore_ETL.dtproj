@@ -39,7 +39,7 @@
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.ConnectByProxy">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectByProxy">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -54,7 +54,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.ConnectionString">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectionString">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -65,11 +65,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=CrisPC;Initial Catalog=Bookstore_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{61384584-DB61-469B-A6E9-DC2D2FF6A084}CrisPC.Bookstore_DW;Auto Translate=False;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=__BOOKSTORE_SQL_SERVER__;Initial Catalog=Bookstore_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{61384584-DB61-469B-A6E9-DC2D2FF6A084}Bookstore_DW;Auto Translate=False;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.ConnectRetryCount">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectRetryCount">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -84,7 +84,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.ConnectRetryInterval">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectRetryInterval">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -99,7 +99,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.ConnectUsingManagedIdentity">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectUsingManagedIdentity">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -114,7 +114,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.InitialCatalog">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.InitialCatalog">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -129,7 +129,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.Password">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.Password">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -143,7 +143,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.RetainSameConnection">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.RetainSameConnection">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -158,7 +158,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.ServerName">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ServerName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -169,11 +169,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">CrisPC</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">__BOOKSTORE_SQL_SERVER__</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_DW.UserName">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.UserName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -187,7 +187,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.ConnectByProxy">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.ConnectByProxy">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -202,7 +202,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.ConnectionString">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.ConnectionString">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -213,11 +213,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=CrisPC;Initial Catalog=Bookstore_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{57C269E3-4DD7-4032-A3FC-C87B62EA6030}CrisPC.Bookstore_OLTP;Auto Translate=False;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=__BOOKSTORE_SQL_SERVER__;Initial Catalog=Bookstore_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{57C269E3-4DD7-4032-A3FC-C87B62EA6030}Bookstore_OLTP;Auto Translate=False;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.ConnectRetryCount">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.ConnectRetryCount">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -232,7 +232,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.ConnectRetryInterval">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.ConnectRetryInterval">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -247,7 +247,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.ConnectUsingManagedIdentity">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.ConnectUsingManagedIdentity">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -262,7 +262,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.InitialCatalog">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.InitialCatalog">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -277,7 +277,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.Password">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.Password">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -291,7 +291,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.RetainSameConnection">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.RetainSameConnection">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -306,7 +306,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.ServerName">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.ServerName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -317,11 +317,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">CrisPC</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">__BOOKSTORE_SQL_SERVER__</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.CrisPC.Bookstore_OLTP.UserName">
+            <SSIS:Parameter SSIS:Name="CM.Bookstore_OLTP.UserName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>

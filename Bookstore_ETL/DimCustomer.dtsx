@@ -151,7 +151,7 @@
                 <connection
                   refId="Package\DFT Cargar Staging Customer\Destino de OLE DB.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[CrisPC.Bookstore_DW]"
+                  connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
                   name="OleDbConnection" />
               </connections>
@@ -372,7 +372,7 @@
                 <connection
                   refId="Package\DFT Cargar Staging Customer\Origen de OLE DB.Connections[OleDbConnection]"
                   connectionManagerID="{57C269E3-4DD7-4032-A3FC-C87B62EA6030}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[CrisPC.Bookstore_OLTP]"
+                  connectionManagerRefId="Project.ConnectionManagers[Bookstore_OLTP]"
                   description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
                   name="OleDbConnection" />
               </connections>

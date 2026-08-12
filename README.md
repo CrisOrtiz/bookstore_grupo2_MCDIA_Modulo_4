@@ -61,6 +61,8 @@ Flujo recomendado:
 3. Ejecuta el script Bookstore_ETL/scripts/Generate-ConnectionManagers.ps1.
 4. Trabaja normalmente en paquetes ETL necesarios (por ejemplo DimCustomer.dtsx o DimShippingMethod.dtsx) sin subir archivos locales de conexión.
 
+Nota: al compilar el proyecto Bookstore_ETL, el repositorio ejecuta automaticamente la generacion de connection managers locales (Directory.Build.targets). Si .env.local no existe, se crea con valores por defecto.
+
 Ejemplo de ejecución:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\Bookstore_ETL\scripts\Generate-ConnectionManagers.ps1

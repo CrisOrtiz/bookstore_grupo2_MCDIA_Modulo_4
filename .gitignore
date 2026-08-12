@@ -1,2 +1,11 @@
 # Archivos temporales y cachés de Visual Studio
 .vs/
+
+# SSIS / SQL Server Data Tools local files
+*.dtsx.user
+*.dtproj.user
+*.ssisuser
+*.settings
+*.bak
+*.tmp
+*.log

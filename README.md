@@ -44,3 +44,24 @@ cd bookstore_tarea_1.2_MCDIA_Modulo_4
 - Haz clic en el botón Publicar (en la esquina inferior derecha).
 
 <img width="1000" height="430" alt="image" src="https://github.com/user-attachments/assets/8716c3b6-3694-4dc8-b5b9-bef8f170e756" />
+
+---
+
+## ETL local con variables de entorno
+
+Para evitar commits de configuraciones locales (como connection managers con Data Source de cada equipo), el repositorio ignora estos archivos:
+- Bookstore_ETL/*.conmgr
+- Bookstore_ETL/bin/
+- Bookstore_ETL/obj/
+- Bookstore_ETL/.env.local
+
+Flujo recomendado:
+1. Copia Bookstore_ETL/.env.example a Bookstore_ETL/.env.local.
+2. Ajusta los valores a tu entorno local de SQL Server.
+3. Ejecuta el script Bookstore_ETL/scripts/Generate-ConnectionManagers.ps1.
+4. Trabaja normalmente en paquetes ETL necesarios (por ejemplo DimCustomer.dtsx o DimShippingMethod.dtsx) sin subir archivos locales de conexión.
+
+Ejemplo de ejecución:
+```powershell
+powershell -ExecutionPolicy Bypass -File .\Bookstore_ETL\scripts\Generate-ConnectionManagers.ps1
+```

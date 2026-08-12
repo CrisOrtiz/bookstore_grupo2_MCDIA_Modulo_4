@@ -9,3 +9,12 @@
 *.bak
 *.tmp
 *.log
+
+# ETL machine-specific and sensitive files
+Bookstore_ETL/Bookstore_ETL.dtproj
+Bookstore_ETL/cmDW.conmgr
+Bookstore_ETL/cmOLTP.conmgr
+
+# ETL build artifacts
+Bookstore_ETL/bin/
+Bookstore_ETL/obj/

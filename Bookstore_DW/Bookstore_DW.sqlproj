@@ -78,9 +78,9 @@
     <Build Include="Schema\Tables\staging\staging.shipping_method.sql" />
     <Build Include="Schema\Programability\Stored procedures\LoadBookstoreDW.sql" />
     <Build Include="Schema\Programability\Stored procedures\LoadDimBook.sql" />
-    <Build Include="Schema\Programability\Stored procedures\LoadDimCustomer.sql" />
     <Build Include="Schema\Programability\Stored procedures\LoadDimShippingMethod.sql" />
     <Build Include="Schema\Programability\Stored procedures\LoadFactOrders.sql" />
+    <Build Include="Schema\Programability\Stored procedures\DW_MergeDimCustomer.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

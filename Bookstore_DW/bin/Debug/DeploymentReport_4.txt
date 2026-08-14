@@ -1,0 +1,39 @@
+﻿** Aspectos destacados
+     Tablas que se volverán a crear con los datos migrados
+       Ninguno
+     Índices clúster que se van a quitar
+       Ninguno
+     Índices clúster que se van a crear
+       Ninguno
+     Posibles incidencias de datos
+       Se está quitando la columna [staging].[book].[BookKey]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[customer].[CustomerKey]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[BookKey]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[CustomerKey]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[FactOrdersKey]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[ShippingMethodKey]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[shipping_method].[ShippingMethodKey]; puede que se pierdan datos.
+
+** Acciones del usuario
+     Modificar
+       [staging].[book] (Tabla)
+       [staging].[customer] (Tabla)
+       [staging].[order] (Tabla)
+       [staging].[shipping_method] (Tabla)
+
+** Acciones de compatibilidad
+     Actualizar
+       [dbo].[LoadDimBook] (Procedimiento)
+       [dbo].[LoadDimCustomer] (Procedimiento)
+       [dbo].[LoadFactOrders] (Procedimiento)
+       [dbo].[LoadDimShippingMethod] (Procedimiento)
+       [dbo].[LoadBookstoreDW] (Procedimiento)
+
+Se está quitando la columna [staging].[book].[BookKey]; puede que se pierdan datos.
+Se está quitando la columna [staging].[customer].[CustomerKey]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[BookKey]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[CustomerKey]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[FactOrdersKey]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[ShippingMethodKey]; puede que se pierdan datos.
+Se está quitando la columna [staging].[shipping_method].[ShippingMethodKey]; puede que se pierdan datos.
+

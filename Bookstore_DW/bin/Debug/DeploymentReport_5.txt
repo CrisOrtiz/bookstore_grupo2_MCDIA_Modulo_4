@@ -1,0 +1,22 @@
+﻿** Aspectos destacados
+     Tablas que se volverán a crear con los datos migrados
+       [staging].[customer]
+     Índices clúster que se van a quitar
+       Ninguno
+     Índices clúster que se van a crear
+       Ninguno
+     Posibles incidencias de datos
+       Ninguno
+
+** Acciones del usuario
+     Quitar
+       restricción sin nombre en [staging].[customer] (Restricción DEFAULT)
+     Volver a crear la tabla
+       [staging].[customer] (Tabla)
+     Crear
+       [dbo].[DW_MergeDimCustomer] (Procedimiento)
+
+** Acciones de compatibilidad
+
+Si se ejecuta esta implementación, los cambios realizados en [staging].[customer] podrían generar errores en tiempo de ejecución en [dbo].[LoadDimCustomer].
+

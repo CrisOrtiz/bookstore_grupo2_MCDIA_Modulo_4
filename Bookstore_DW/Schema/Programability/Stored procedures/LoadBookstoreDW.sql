@@ -4,7 +4,7 @@ BEGIN
     SET NOCOUNT ON;
 
     -- Dimensiones primero (FactOrders tiene FK hacia todas)
-    EXEC [dbo].[LoadDimCustomer];
+    EXEC [dbo].[DW_MergeDimCustomer];
     EXEC [dbo].[LoadDimBook];
     EXEC [dbo].[LoadDimShippingMethod];
 

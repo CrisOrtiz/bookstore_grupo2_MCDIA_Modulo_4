@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{437ADF02-A00B-4DAD-A1E1-0DC11241BC20}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{A59E8E75-7AC4-4C64-B38C-C5BA5D0C4575}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -50,7 +50,20 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{61384584-DB61-469B-A6E9-DC2D2FF6A084}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE [staging].[order]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [staging].[order]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::LastRowVersion"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::dbts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="20"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -67,7 +80,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{61384584-DB61-469B-A6E9-DC2D2FF6A084}"
-          SQLTask:SqlStatementSource="EXECUTE dbo.DW_MergeFactOrders;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="EXECUTE dbo.LoadFactOrders;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -115,13 +128,13 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Tarea Flujo de datos"
+      DTS:refId="Package\Load Orders"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarea Flujo de datos"
       DTS:DTSID="{F6A4DF98-2050-4881-BD7E-53CFDD10E333}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Tarea Flujo de datos"
+      DTS:ObjectName="Load Orders"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -129,7 +142,7 @@
           version="1">
           <components>
             <component
-              refId="Package\Tarea Flujo de datos\Derived Columns"
+              refId="Package\Load Orders\Derived Columns"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
               description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
@@ -137,33 +150,33 @@
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Derived Columns.Inputs[Entrada de columna derivada]"
+                  refId="Package\Load Orders\Derived Columns.Inputs[Entrada de columna derivada]"
                   description="Entrada en la transformación Columna derivada"
                   name="Entrada de columna derivada">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Derived Columns.Inputs[Entrada de columna derivada].Columns[order_date]"
+                      refId="Package\Load Orders\Derived Columns.Inputs[Entrada de columna derivada].Columns[order_date]"
                       cachedDataType="dbTimeStamp"
                       cachedName="order_date"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]" />
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada]"
+                  refId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada]"
                   description="Salida predeterminada de la transformación Columna derivada"
                   exclusionGroup="1"
                   name="Salida de columna derivada"
-                  synchronousInputId="Package\Tarea Flujo de datos\Derived Columns.Inputs[Entrada de columna derivada]">
+                  synchronousInputId="Package\Load Orders\Derived Columns.Inputs[Entrada de columna derivada]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]"
+                      refId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Cálculo"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]"
                       name="OrderDateKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -171,7 +184,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Expresión de columna derivada"
-                          name="Expression">(DT_I4)([YEAR](#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]}) * 10000 + [MONTH](#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]}) * 100 + [DAY](#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]}))</property>
+                          name="Expression">(DT_I4)([YEAR](#{Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]}) * 10000 + [MONTH](#{Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]}) * 100 + [DAY](#{Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]}))</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -181,11 +194,11 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]"
+                      refId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]"
                       dataType="i4"
                       errorOrTruncationOperation="Cálculo"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]"
                       name="Quantity"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -206,23 +219,23 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de error de columna derivada]"
+                  refId="Package\Load Orders\Derived Columns.Outputs[Salida de error de columna derivada]"
                   description="Salida de error de la transformación Columna derivada"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de columna derivada"
-                  synchronousInputId="Package\Tarea Flujo de datos\Derived Columns.Inputs[Entrada de columna derivada]">
+                  synchronousInputId="Package\Load Orders\Derived Columns.Inputs[Entrada de columna derivada]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -231,7 +244,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Get Orders"
+              refId="Package\Load Orders\Get Orders"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
               description="Origen de OLE DB"
@@ -255,7 +268,7 @@
                   dataType="System.String"
                   description="Comando SQL para ejecutar."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXECUTE [dbo].[GetOrderChangesByRowVersion] ?, ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXECUTE [dbo].[GetOrderChangesByRowVersion] @startRow = ?, @endRow = ?</property>
                 <property
                   dataType="System.String"
                   description="Variable que contiene el comando SQL para ejecutar."
@@ -276,11 +289,11 @@
                 <property
                   dataType="System.String"
                   description="Asignaciones entre los parámetros del comando SQL y las variables."
-                  name="ParameterMapping">"Parámetro0:Input",{7174CC3C-716B-4B86-AA7C-7DA096D17EC3};"Parámetro1:Input",{7665388A-E45F-48A9-BA9D-784532E2593C};</property>
+                  name="ParameterMapping">"@startRow:Input",{7174CC3C-716B-4B86-AA7C-7DA096D17EC3};"@endRow:Input",{7665388A-E45F-48A9-BA9D-784532E2593C};</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Get Orders.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Get Orders.Connections[OleDbConnection]"
                   connectionManagerID="{57C269E3-4DD7-4032-A3FC-C87B62EA6030}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_OLTP]"
                   description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
@@ -288,70 +301,70 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB]"
+                  refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB]"
                   name="Salida de origen de OLE DB">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_id]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]"
                       name="order_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[line_id]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[line_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]"
                       name="line_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]"
                       dataType="dbTimeStamp"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_date]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_date]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_date]"
                       name="order_date"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[customer_id]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[customer_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]"
                       name="customer_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[book_id]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[book_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]"
                       name="book_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[shipping_method_id]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[shipping_method_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]"
                       name="shipping_method_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[price]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]"
+                      externalMetadataColumnId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[price]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]"
                       name="price"
                       precision="5"
                       scale="2"
@@ -360,31 +373,31 @@
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_id]"
                       dataType="i4"
                       name="order_id" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[line_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[line_id]"
                       dataType="i4"
                       name="line_id" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_date]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[order_date]"
                       dataType="dbTimeStamp"
                       name="order_date" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[customer_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[customer_id]"
                       dataType="i4"
                       name="customer_id" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[book_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[book_id]"
                       dataType="i4"
                       name="book_id" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[shipping_method_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[shipping_method_id]"
                       dataType="i4"
                       name="shipping_method_id" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[price]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[price]"
                       dataType="numeric"
                       name="price"
                       precision="5"
@@ -392,57 +405,57 @@
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB]"
+                  refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB]"
                   isErrorOut="true"
                   name="Salida de error de origen de OLE DB">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_id]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_id]"
                       name="order_id" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[line_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[line_id]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[line_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[line_id]"
                       name="line_id" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_date]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_date]"
                       dataType="dbTimeStamp"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_date]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[order_date]"
                       name="order_date" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[customer_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[customer_id]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[customer_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[customer_id]"
                       name="customer_id" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[book_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[book_id]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[book_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[book_id]"
                       name="book_id" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[shipping_method_id]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[shipping_method_id]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[shipping_method_id]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[shipping_method_id]"
                       name="shipping_method_id" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[price]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[price]"
                       dataType="numeric"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[price]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[price]"
                       name="price"
                       precision="5"
                       scale="2" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -451,7 +464,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Load Facts"
+              refId="Package\Load Orders\Load Facts"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
               description="Destino de OLE DB"
@@ -508,7 +521,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Load Facts.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Load Facts.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
@@ -516,119 +529,119 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB]"
+                  refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB]"
                   errorOrTruncationOperation="Insertar"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="Entrada de destino de OLE DB">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[OrderDateKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[OrderDateKey]"
                       cachedDataType="i4"
                       cachedName="OrderDateKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[Quantity]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[Quantity]"
                       cachedDataType="i4"
                       cachedName="Quantity"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[CustomerKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[CustomerKey]"
                       cachedDataType="i4"
                       cachedName="CustomerKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[BookKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[BookKey]"
                       cachedDataType="i4"
                       cachedName="BookKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
+                      lineageId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[ShippingMethodKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[ShippingMethodKey]"
                       cachedDataType="i4"
                       cachedName="ShippingMethodKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[order_id]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[order_id]"
                       cachedDataType="i4"
                       cachedName="order_id"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[line_id]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[line_id]"
                       cachedDataType="i4"
                       cachedName="line_id"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[price]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[price]"
                       cachedDataType="numeric"
                       cachedName="price"
                       cachedPrecision="5"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[Cost]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].Columns[Cost]"
                       cachedDataType="numeric"
                       cachedName="Cost"
                       cachedPrecision="6"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]" />
+                      externalMetadataColumnId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[FactOrdersKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[FactOrdersKey]"
                       dataType="i4"
                       name="FactOrdersKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
                       dataType="i4"
                       name="OrderID" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
                       dataType="i4"
                       name="LineID" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
                       dataType="i4"
                       name="OrderDateKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
                       dataType="i4"
                       name="CustomerKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
                       dataType="i4"
                       name="BookKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
                       dataType="i4"
                       name="ShippingMethodKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
                       dataType="i4"
                       name="Quantity" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
                       dataType="numeric"
                       name="UnitPrice"
                       precision="5"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineAmount]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineAmount]"
                       dataType="numeric"
                       name="LineAmount"
                       precision="16"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
+                      refId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
                       dataType="numeric"
                       name="ShippingCost"
                       precision="6"
@@ -638,22 +651,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Load Facts.Outputs[Salida de error de destino de OLE DB]"
+                  refId="Package\Load Orders\Load Facts.Outputs[Salida de error de destino de OLE DB]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de destino de OLE DB"
-                  synchronousInputId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB]">
+                  synchronousInputId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Load Facts.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -662,7 +675,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Load staging"
+              refId="Package\Load Orders\Load staging"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
               description="Destino de OLE DB"
@@ -719,7 +732,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Load staging.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Load staging.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
@@ -727,99 +740,115 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB]"
+                  refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB]"
                   errorOrTruncationOperation="Insertar"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="Entrada de destino de OLE DB">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[OrderDateKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[OrderDateKey]"
                       cachedDataType="i4"
                       cachedName="OrderDateKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[OrderDateKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[Quantity]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[Quantity]"
                       cachedDataType="i4"
                       cachedName="Quantity"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
-                      lineageId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
+                      lineageId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada].Columns[Quantity]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[CustomerKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[CustomerKey]"
                       cachedDataType="i4"
                       cachedName="CustomerKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[BookKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[BookKey]"
                       cachedDataType="i4"
                       cachedName="BookKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
+                      lineageId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[ShippingMethodKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[ShippingMethodKey]"
                       cachedDataType="i4"
                       cachedName="ShippingMethodKey"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[order_id]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[order_id]"
                       cachedDataType="i4"
                       cachedName="order_id"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].Columns[line_id]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[line_id]"
                       cachedDataType="i4"
                       cachedName="line_id"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]" />
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]" />
+                    <inputColumn
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[price]"
+                      cachedDataType="numeric"
+                      cachedName="price"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[price]" />
+                    <inputColumn
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].Columns[Cost]"
+                      cachedDataType="numeric"
+                      cachedName="Cost"
+                      cachedPrecision="6"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderID]"
                       dataType="i4"
                       name="OrderID" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[LineID]"
                       dataType="i4"
                       name="LineID" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrderDateKey]"
                       dataType="i4"
                       name="OrderDateKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[CustomerKey]"
                       dataType="i4"
                       name="CustomerKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[BookKey]"
                       dataType="i4"
                       name="BookKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingMethodKey]"
                       dataType="i4"
                       name="ShippingMethodKey" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[Quantity]"
                       dataType="i4"
                       name="Quantity" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[UnitPrice]"
                       dataType="numeric"
                       name="UnitPrice"
                       precision="5"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[ShippingCost]"
                       dataType="numeric"
                       name="ShippingCost"
                       precision="5"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[staging_load_date]"
+                      refId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB].ExternalColumns[staging_load_date]"
                       dataType="dbTimeStamp"
                       name="staging_load_date" />
                   </externalMetadataColumns>
@@ -827,22 +856,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Load staging.Outputs[Salida de error de destino de OLE DB]"
+                  refId="Package\Load Orders\Load staging.Outputs[Salida de error de destino de OLE DB]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de destino de OLE DB"
-                  synchronousInputId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB]">
+                  synchronousInputId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Load staging.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -851,7 +880,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Lookup Book"
+              refId="Package\Load Orders\Lookup Book"
               componentClassID="Microsoft.Lookup"
               contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
               description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
@@ -864,13 +893,13 @@
                   description="Especifica la instrucción SQL que genera la tabla de búsqueda."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM [dbo].[DimBook]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimBook]</property>
                 <property
                   dataType="System.String"
                   description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT * FROM [dbo].[DimBook]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimBook]) [refTable]
 where [refTable].[BookID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -886,7 +915,7 @@ where [refTable].[BookID] = ?</property>
                   dataType="System.Int32"
                   description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
+                  typeConverter="LookupNoMatchBehavior">1</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
@@ -907,7 +936,7 @@ where [refTable].[BookID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]};</property>
+                  name="ParameterMap">#{Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -919,7 +948,7 @@ where [refTable].[BookID] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Lookup Book.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Lookup Book.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
@@ -927,14 +956,14 @@ where [refTable].[BookID] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Lookup Book.Inputs[Entrada de búsqueda]"
+                  refId="Package\Load Orders\Lookup Book.Inputs[Entrada de búsqueda]"
                   name="Entrada de búsqueda">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Book.Inputs[Entrada de búsqueda].Columns[book_id]"
+                      refId="Package\Load Orders\Lookup Book.Inputs[Entrada de búsqueda].Columns[book_id]"
                       cachedDataType="i4"
                       cachedName="book_id"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]">
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[book_id]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -952,18 +981,17 @@ where [refTable].[BookID] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda]"
                   errorOrTruncationOperation="Búsqueda"
-                  errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Salida de entradas coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Book.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Book.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]"
+                      refId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copiar columna"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]"
+                      lineageId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda].Columns[BookKey]"
                       name="BookKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -977,30 +1005,30 @@ where [refTable].[BookID] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas no coincidentes de búsqueda]"
                   description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
                   exclusionGroup="1"
                   name="Salida de entradas no coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Book.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Book.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de error de búsqueda]"
+                  refId="Package\Load Orders\Lookup Book.Outputs[Salida de error de búsqueda]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Book.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Book.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Lookup Book.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1009,7 +1037,7 @@ where [refTable].[BookID] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Lookup Customer"
+              refId="Package\Load Orders\Lookup Customer"
               componentClassID="Microsoft.Lookup"
               contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
               description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
@@ -1065,7 +1093,7 @@ where [refTable].[CustomerID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]};</property>
+                  name="ParameterMap">#{Package\Load Orders\235:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -1077,7 +1105,7 @@ where [refTable].[CustomerID] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Lookup Customer.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Lookup Customer.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
@@ -1085,14 +1113,14 @@ where [refTable].[CustomerID] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Lookup Customer.Inputs[Entrada de búsqueda]"
+                  refId="Package\Load Orders\Lookup Customer.Inputs[Entrada de búsqueda]"
                   name="Entrada de búsqueda">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Customer.Inputs[Entrada de búsqueda].Columns[customer_id]"
+                      refId="Package\Load Orders\Lookup Customer.Inputs[Entrada de búsqueda].Columns[customer_id]"
                       cachedDataType="i4"
                       cachedName="customer_id"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]">
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[customer_id]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1110,18 +1138,18 @@ where [refTable].[CustomerID] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda]"
                   errorOrTruncationOperation="Búsqueda"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Salida de entradas coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Customer.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Customer.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]"
+                      refId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copiar columna"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]"
+                      lineageId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda].Columns[CustomerKey]"
                       name="CustomerKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1135,30 +1163,30 @@ where [refTable].[CustomerID] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas no coincidentes de búsqueda]"
                   description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
                   exclusionGroup="1"
                   name="Salida de entradas no coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Customer.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Customer.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de error de búsqueda]"
+                  refId="Package\Load Orders\Lookup Customer.Outputs[Salida de error de búsqueda]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Customer.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Customer.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Lookup Customer.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1167,7 +1195,7 @@ where [refTable].[CustomerID] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Lookup Orders"
+              refId="Package\Load Orders\Lookup Orders"
               componentClassID="Microsoft.Lookup"
               contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
               description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
@@ -1223,7 +1251,7 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]};#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]};</property>
+                  name="ParameterMap">#{Package\Load Orders\236:invalid};#{Package\Load Orders\237:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -1235,7 +1263,7 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Lookup Orders.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Lookup Orders.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
@@ -1243,14 +1271,14 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda]"
+                  refId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda]"
                   name="Entrada de búsqueda">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda].Columns[order_id]"
+                      refId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda].Columns[order_id]"
                       cachedDataType="i4"
                       cachedName="order_id"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]">
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[order_id]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1263,10 +1291,10 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda].Columns[line_id]"
+                      refId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda].Columns[line_id]"
                       cachedDataType="i4"
                       cachedName="line_id"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]">
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[line_id]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1284,38 +1312,38 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Orders.Outputs[Salida de entradas coincidentes de búsqueda]"
                   errorOrTruncationOperation="Búsqueda"
                   exclusionGroup="1"
                   name="Salida de entradas coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Orders.Outputs[Salida de entradas no coincidentes de búsqueda]"
                   description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
                   exclusionGroup="1"
                   name="Salida de entradas no coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de error de búsqueda]"
+                  refId="Package\Load Orders\Lookup Orders.Outputs[Salida de error de búsqueda]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Lookup Orders.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1324,7 +1352,7 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Tarea Flujo de datos\Lookup Shipping Method"
+              refId="Package\Load Orders\Lookup Shipping Method"
               componentClassID="Microsoft.Lookup"
               contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
               description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
@@ -1380,7 +1408,7 @@ where [refTable].[MethodID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]};</property>
+                  name="ParameterMap">#{Package\Load Orders\238:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -1392,7 +1420,7 @@ where [refTable].[MethodID] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Connections[OleDbConnection]"
+                  refId="Package\Load Orders\Lookup Shipping Method.Connections[OleDbConnection]"
                   connectionManagerID="{61384584-DB61-469B-A6E9-DC2D2FF6A084}:external"
                   connectionManagerRefId="Project.ConnectionManagers[Bookstore_DW]"
                   description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
@@ -1400,14 +1428,14 @@ where [refTable].[MethodID] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Inputs[Entrada de búsqueda]"
+                  refId="Package\Load Orders\Lookup Shipping Method.Inputs[Entrada de búsqueda]"
                   name="Entrada de búsqueda">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Inputs[Entrada de búsqueda].Columns[shipping_method_id]"
+                      refId="Package\Load Orders\Lookup Shipping Method.Inputs[Entrada de búsqueda].Columns[shipping_method_id]"
                       cachedDataType="i4"
                       cachedName="shipping_method_id"
-                      lineageId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]">
+                      lineageId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB].Columns[shipping_method_id]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -1425,18 +1453,18 @@ where [refTable].[MethodID] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda]"
                   errorOrTruncationOperation="Búsqueda"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Salida de entradas coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Shipping Method.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Shipping Method.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]"
+                      refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Copiar columna"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ShippingMethodKey]"
                       name="ShippingMethodKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1447,10 +1475,10 @@ where [refTable].[MethodID] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]"
+                      refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]"
                       dataType="numeric"
                       errorOrTruncationOperation="Copiar columna"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda].Columns[Cost]"
                       name="Cost"
                       precision="6"
                       scale="2"
@@ -1466,30 +1494,30 @@ where [refTable].[MethodID] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas no coincidentes de búsqueda]"
                   description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
                   exclusionGroup="1"
                   name="Salida de entradas no coincidentes de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Shipping Method.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Shipping Method.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de error de búsqueda]"
+                  refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de error de búsqueda]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de búsqueda"
-                  synchronousInputId="Package\Tarea Flujo de datos\Lookup Shipping Method.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\Load Orders\Lookup Shipping Method.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      refId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      lineageId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1500,40 +1528,40 @@ where [refTable].[MethodID] = ?</property>
           </components>
           <paths>
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de columna derivada]"
-              endId="Package\Tarea Flujo de datos\Lookup Customer.Inputs[Entrada de búsqueda]"
+              refId="Package\Load Orders.Paths[Salida de columna derivada]"
+              endId="Package\Load Orders\Lookup Customer.Inputs[Entrada de búsqueda]"
               name="Salida de columna derivada"
-              startId="Package\Tarea Flujo de datos\Derived Columns.Outputs[Salida de columna derivada]" />
+              startId="Package\Load Orders\Derived Columns.Outputs[Salida de columna derivada]" />
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda]"
-              endId="Package\Tarea Flujo de datos\Lookup Book.Inputs[Entrada de búsqueda]"
+              refId="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda]"
+              endId="Package\Load Orders\Lookup Book.Inputs[Entrada de búsqueda]"
               name="Salida de entradas coincidentes de búsqueda"
-              startId="Package\Tarea Flujo de datos\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda]" />
+              startId="Package\Load Orders\Lookup Customer.Outputs[Salida de entradas coincidentes de búsqueda]" />
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda1]"
-              endId="Package\Tarea Flujo de datos\Lookup Shipping Method.Inputs[Entrada de búsqueda]"
+              refId="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda1]"
+              endId="Package\Load Orders\Lookup Shipping Method.Inputs[Entrada de búsqueda]"
               name="Salida de entradas coincidentes de búsqueda"
-              startId="Package\Tarea Flujo de datos\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda]" />
+              startId="Package\Load Orders\Lookup Book.Outputs[Salida de entradas coincidentes de búsqueda]" />
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda2]"
-              endId="Package\Tarea Flujo de datos\Lookup Orders.Inputs[Entrada de búsqueda]"
+              refId="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda2]"
+              endId="Package\Load Orders\Lookup Orders.Inputs[Entrada de búsqueda]"
               name="Salida de entradas coincidentes de búsqueda"
-              startId="Package\Tarea Flujo de datos\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda]" />
+              startId="Package\Load Orders\Lookup Shipping Method.Outputs[Salida de entradas coincidentes de búsqueda]" />
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda3]"
-              endId="Package\Tarea Flujo de datos\Load staging.Inputs[Entrada de destino de OLE DB]"
+              refId="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda3]"
+              endId="Package\Load Orders\Load staging.Inputs[Entrada de destino de OLE DB]"
               name="Salida de entradas coincidentes de búsqueda"
-              startId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de entradas coincidentes de búsqueda]" />
+              startId="Package\Load Orders\Lookup Orders.Outputs[Salida de entradas coincidentes de búsqueda]" />
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas no coincidentes de búsqueda]"
-              endId="Package\Tarea Flujo de datos\Load Facts.Inputs[Entrada de destino de OLE DB]"
+              refId="Package\Load Orders.Paths[Salida de entradas no coincidentes de búsqueda]"
+              endId="Package\Load Orders\Load Facts.Inputs[Entrada de destino de OLE DB]"
               name="Salida de entradas no coincidentes de búsqueda"
-              startId="Package\Tarea Flujo de datos\Lookup Orders.Outputs[Salida de entradas no coincidentes de búsqueda]" />
+              startId="Package\Load Orders\Lookup Orders.Outputs[Salida de entradas no coincidentes de búsqueda]" />
             <path
-              refId="Package\Tarea Flujo de datos.Paths[Salida de origen de OLE DB]"
-              endId="Package\Tarea Flujo de datos\Derived Columns.Inputs[Entrada de columna derivada]"
+              refId="Package\Load Orders.Paths[Salida de origen de OLE DB]"
+              endId="Package\Load Orders\Derived Columns.Inputs[Entrada de columna derivada]"
               name="Salida de origen de OLE DB"
-              startId="Package\Tarea Flujo de datos\Get Orders.Outputs[Salida de origen de OLE DB]" />
+              startId="Package\Load Orders\Get Orders.Outputs[Salida de origen de OLE DB]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1552,7 +1580,7 @@ where [refTable].[MethodID] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{61384584-DB61-469B-A6E9-DC2D2FF6A084}"
-          SQLTask:SqlStatementSource="IF EXISTS (SELECT 1 FROM dbo.PackageConfig WHERE ConfigurationFilter = 'FactOrders')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="IF EXISTS (SELECT 1 FROM dbo.PackageConfig WHERE ConfigurationFilter = 'FactOrders')&#xA;    UPDATE dbo.PackageConfig &#xA;    SET ConfiguredValue = ? &#xA;    WHERE ConfigurationFilter = 'FactOrders';&#xA;ELSE&#xA;    INSERT INTO dbo.PackageConfig (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) &#xA;    VALUES ('FactOrders', ?, '\Package\FactOrders.dtsx', 'Int64');" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::dbts"
@@ -1581,11 +1609,11 @@ where [refTable].[MethodID] = ?</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
       DTS:CreationName=""
-      DTS:DTSID="{96792293-5602-478D-B889-1252BF50646B}"
+      DTS:DTSID="{8C8C8CAA-3F2E-4A16-924A-4709F08A449E}"
       DTS:From="Package\Clean-up staging"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 1"
-      DTS:To="Package\Tarea Flujo de datos" />
+      DTS:To="Package\Load Orders" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Restricción 2]"
       DTS:CreationName=""
@@ -1598,7 +1626,7 @@ where [refTable].[MethodID] = ?</property>
       DTS:refId="Package.PrecedenceConstraints[Restricción 3]"
       DTS:CreationName=""
       DTS:DTSID="{01D0A6FF-57A3-4BA7-8220-C4E2A4B1E983}"
-      DTS:From="Package\Tarea Flujo de datos"
+      DTS:From="Package\Load Orders"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 3"
       DTS:To="Package\EXEC DW_MergeFactOrders" />
@@ -1624,6 +1652,14 @@ where [refTable].[MethodID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="165.735849056604,41.6603773584906"
+          Id="Package\Clean-up staging"
+          TopLeft="509.999992400407,245.660375212723" />
+        <NodeLayout
+          Size="165.735849056604,41.6603773584906"
+          Id="Package\EXEC DW_MergeFactOrders"
+          TopLeft="508.999992415309,404.981130585355" />
+        <NodeLayout
           Size="195.622641509434,43.4716981132076"
           Id="Package\Get Database RowVersion"
           TopLeft="489.999992698431,81.9999987781048" />
@@ -1632,13 +1668,13 @@ where [refTable].[MethodID] = ?</property>
           Id="Package\Get LastRowVersion"
           TopLeft="511.999992370605,159.999997615814" />
         <NodeLayout
-          Size="165.735849056604,41.6603773584906"
-          Id="Package\Clean-up staging"
-          TopLeft="509.999992400407,245.660375212723" />
+          Size="133.132075471699,41.6603773584906"
+          Id="Package\Load Orders"
+          TopLeft="521.999992221594,323.999995172024" />
         <NodeLayout
-          Size="165.735849056604,41.6603773584906"
-          Id="Package\EXEC DW_MergeFactOrders"
-          TopLeft="508.999992415309,404.981130585355" />
+          Size="139.471698113208,41.6603773584906"
+          Id="Package\Update config"
+          TopLeft="519.999992251396,480.999992832542" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
           TopLeft="591.339615176027,125.471696891312">
@@ -1653,6 +1689,28 @@ where [refTable].[MethodID] = ?</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,27.028300724502" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="590.716973443076,287.320752571214">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.6792426008099"
+              Start="0,0"
+              End="0,29.1792426008099">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.1792426008099" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1683,10 +1741,28 @@ where [refTable].[MethodID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="139.471698113208,41.6603773584906"
-          Id="Package\Update config"
-          TopLeft="519.999992251396,480.999992832542" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 3]"
+          TopLeft="590.216973450527,365.660372530514">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.3207580548408"
+              Start="0,0"
+              End="0,31.8207580548408">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.8207580548408" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 4]"
           TopLeft="590.801879125805,446.641507943846">
@@ -1709,110 +1785,60 @@ where [refTable].[MethodID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="169.358490566038,41.6603773584906"
-          Id="Package\Tarea Flujo de datos"
-          TopLeft="505.999992460012,325.999995142222" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="591.77357733587,287.320752571214">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.6792425710076"
-              Start="0,0"
-              End="0,31.1792425710076">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.1792425710076" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 3]"
-          TopLeft="591.273577343321,367.660372500712">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,37.3207580846432"
-              Start="0,0"
-              End="0,29.8207580846432">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.8207580846432" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Tarea Flujo de datos">
+    design-time-name="Package\Load Orders">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="126.792452830189,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Get Orders"
-          TopLeft="538.999991968274,157.999997645617" />
+          Size="188.377358490567,41.6603773584906"
+          Id="Package\Load Orders\Lookup Shipping Method"
+          TopLeft="506.999992445111,488.32075047015" />
         <NodeLayout
-          Size="153.962264150944,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Derived Columns"
-          TopLeft="519.999992251396,232.999996528029" />
-        <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de OLE DB]"
-          TopLeft="599.688671355118,199.660375004107">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.3396215239223"
-              Start="0,0"
-              End="0,25.8396215239223">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.8396215239223" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="126.792452830189,41.6603773584906"
+          Id="Package\Load Orders\Load Facts"
+          TopLeft="739.99998897314,647.999990344047" />
         <NodeLayout
           Size="156.679245283019,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Lookup Customer"
+          Id="Package\Load Orders\Lookup Customer"
           TopLeft="515.999992311001,310.999995365739" />
+        <NodeLayout
+          Size="144,41.6603773584906"
+          Id="Package\Load Orders\Lookup Orders"
+          TopLeft="527.999992132187,567.981128156466" />
+        <NodeLayout
+          Size="126.792452830189,41.6603773584906"
+          Id="Package\Load Orders\Get Orders"
+          TopLeft="534.999992027878,147.999997794628" />
+        <NodeLayout
+          Size="135.849056603774,41.6603773584906"
+          Id="Package\Load Orders\Lookup Book"
+          TopLeft="529.999992102384,404.660372843439" />
+        <NodeLayout
+          Size="153.962264150944,41.6603773584906"
+          Id="Package\Load Orders\Derived Columns"
+          TopLeft="519.999992251396,232.999996528029" />
+        <NodeLayout
+          Size="134.943396226416,41.6603773584906"
+          Id="Package\Load Orders\Load staging"
+          TopLeft="334.999995008111,644.999990388751" />
         <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de columna derivada]"
-          TopLeft="595.660369639689,274.66037388652">
+          Id="Package\Load Orders.Paths[Salida de origen de OLE DB]"
+          TopLeft="597.68867138492,189.660375153119">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36.3396214792187"
+              EndConnector="0,43.3396213749104"
               Start="0,0"
-              End="0,28.8396214792187">
+              End="0,35.8396213749104">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.8396214792187" />
+                    End="0,35.8396213749104" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1821,96 +1847,44 @@ where [refTable].[MethodID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="135.849056603774,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Lookup Book"
-          TopLeft="529.999992102384,404.660372843439" />
         <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda]"
-          TopLeft="596.132067678391,352.660372724229">
+          Id="Package\Load Orders.Paths[Salida de entradas no coincidentes de búsqueda]"
+          TopLeft="622.666658798853,609.641505514957">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,52.0000001192093"
+              EndConnector="180.729556589382,38.3584848290906"
               Start="0,0"
-              End="0,44.5000001192093">
+              End="180.729556589382,30.8584848290906">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.5000001192093" />
+                    End="0,11.5963070184214" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.5963070184214"
+                    Point2="0,15.5963070184214"
+                    Point3="4,15.5963070184214" />
+                  <mssgle:LineSegment
+                    End="176.729556589382,15.5963070184214" />
+                  <mssgle:CubicBezierSegment
+                    Point1="176.729556589382,15.5963070184214"
+                    Point2="180.729556589382,15.5963070184214"
+                    Point3="180.729556589382,19.5963070184214" />
+                  <mssgle:LineSegment
+                    End="180.729556589382,30.8584848290906" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-99.8190234375,16.1523438096046,199.638046875,12.1953125"
+              BoundingBox="-16.524245142809,20.5963070184214,213.778046875,12.1953125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="188.377358490567,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Lookup Shipping Method"
-          TopLeft="506.999992445111,488.32075047015" />
         <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda1]"
-          TopLeft="599.556596047333,446.320750201929">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42.0000002682208"
-              Start="0,0"
-              End="0,34.5000002682208">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.5000002682208" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-99.8190234375,11.1523438841104,199.638046875,12.1953125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="144,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Lookup Orders"
-          TopLeft="527.999992132187,567.981128156466" />
-        <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda2]"
-          TopLeft="600.59433191129,529.981127828641">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.0000003278254"
-              Start="0,0"
-              End="0,30.5000003278254">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.5000003278254" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-99.8190234375,9.15234391391272,199.638046875,12.1953125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="134.943396226416,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Load staging"
-          TopLeft="334.999995008111,644.999990388751" />
-        <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda3]"
+          Id="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda3]"
           TopLeft="599.999992132187,609.641505514957">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1945,110 +1919,110 @@ where [refTable].[MethodID] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="126.792452830189,41.6603773584906"
-          Id="Package\Tarea Flujo de datos\Load Facts"
-          TopLeft="739.99998897314,647.999990344047" />
         <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas no coincidentes de búsqueda]"
-          TopLeft="622.666658798853,609.641505514957">
+          Id="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda2]"
+          TopLeft="600.59433191129,529.981127828641">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="180.729556589382,38.3584848290906"
+              EndConnector="0,38.0000003278254"
               Start="0,0"
-              End="180.729556589382,30.8584848290906">
+              End="0,30.5000003278254">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.5963070184214" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,11.5963070184214"
-                    Point2="0,15.5963070184214"
-                    Point3="4,15.5963070184214" />
-                  <mssgle:LineSegment
-                    End="176.729556589382,15.5963070184214" />
-                  <mssgle:CubicBezierSegment
-                    Point1="176.729556589382,15.5963070184214"
-                    Point2="180.729556589382,15.5963070184214"
-                    Point3="180.729556589382,19.5963070184214" />
-                  <mssgle:LineSegment
-                    End="180.729556589382,30.8584848290906" />
+                    End="0,30.5000003278254" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-16.5242451428092,20.5963070184214,213.778046875,12.1953125"
+              BoundingBox="-99.8190234375,9.1523439139127,199.638046875,12.1953125"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda1]"
+          TopLeft="599.556596047333,446.320750201929">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.0000002682208"
+              Start="0,0"
+              End="0,34.5000002682208">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5000002682208" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-99.8190234375,11.1523438841104,199.638046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Orders.Paths[Salida de entradas coincidentes de búsqueda]"
+          TopLeft="596.132067678391,352.660372724229">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.0000001192093"
+              Start="0,0"
+              End="0,44.5000001192093">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5000001192093" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-99.8190234375,16.1523438096046,199.638046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Orders.Paths[Salida de columna derivada]"
+          TopLeft="595.660369639689,274.66037388652">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.3396214792187"
+              Start="0,0"
+              End="0,28.8396214792187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.8396214792187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Get Orders">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Lookup Customer">
+    design-time-name="Package\Load Orders\Lookup Shipping Method">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Lookup Book">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Lookup Shipping Method">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2058,7 +2032,7 @@ where [refTable].[MethodID] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2066,30 +2040,7 @@ where [refTable].[MethodID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Lookup Orders">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Load staging">
+    design-time-name="Package\Load Orders\Load Facts">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2102,7 +2053,84 @@ where [refTable].[MethodID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Load Facts">
+    design-time-name="Package\Load Orders\Lookup Customer">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Orders\Lookup Orders">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Orders\Get Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Orders\Lookup Book">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimBook]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Orders\Load staging">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

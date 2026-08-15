@@ -10,9 +10,6 @@
 *.tmp
 *.log
 
-# ETL local environment files (do not commit)
-Bookstore_ETL/*.conmgr
-
 # ETL generated artifacts (do not commit)
 Bookstore_ETL/bin/
 Bookstore_ETL/obj/

@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{A59E8E75-7AC4-4C64-B38C-C5BA5D0C4575}">
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{576BBFB0-BE89-48F1-A056-E40C9B102E17}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -1093,7 +1093,7 @@ where [refTable].[CustomerID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Load Orders\235:invalid};</property>
+                  name="ParameterMap">#{Package\Load Orders\234:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -1251,7 +1251,7 @@ where [refTable].[OrderID] = ? and [refTable].[LineID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Load Orders\236:invalid};#{Package\Load Orders\237:invalid};</property>
+                  name="ParameterMap">#{Package\Load Orders\235:invalid};#{Package\Load Orders\236:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -1408,7 +1408,7 @@ where [refTable].[MethodID] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap">#{Package\Load Orders\238:invalid};</property>
+                  name="ParameterMap">#{Package\Load Orders\237:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -1794,37 +1794,37 @@ where [refTable].[MethodID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="126.792452830189,41.6603773584906"
+          Id="Package\Load Orders\Get Orders"
+          TopLeft="534.999992027878,147.999997794628" />
+        <NodeLayout
           Size="188.377358490567,41.6603773584906"
           Id="Package\Load Orders\Lookup Shipping Method"
           TopLeft="506.999992445111,488.32075047015" />
-        <NodeLayout
-          Size="126.792452830189,41.6603773584906"
-          Id="Package\Load Orders\Load Facts"
-          TopLeft="739.99998897314,647.999990344047" />
         <NodeLayout
           Size="156.679245283019,41.6603773584906"
           Id="Package\Load Orders\Lookup Customer"
           TopLeft="515.999992311001,310.999995365739" />
         <NodeLayout
+          Size="135.849056603774,41.6603773584906"
+          Id="Package\Load Orders\Lookup Book"
+          TopLeft="529.999992102384,404.660372843439" />
+        <NodeLayout
           Size="144,41.6603773584906"
           Id="Package\Load Orders\Lookup Orders"
           TopLeft="527.999992132187,567.981128156466" />
         <NodeLayout
-          Size="126.792452830189,41.6603773584906"
-          Id="Package\Load Orders\Get Orders"
-          TopLeft="534.999992027878,147.999997794628" />
-        <NodeLayout
-          Size="135.849056603774,41.6603773584906"
-          Id="Package\Load Orders\Lookup Book"
-          TopLeft="529.999992102384,404.660372843439" />
+          Size="134.943396226416,41.6603773584906"
+          Id="Package\Load Orders\Load staging"
+          TopLeft="334.999995008111,644.999990388751" />
         <NodeLayout
           Size="153.962264150944,41.6603773584906"
           Id="Package\Load Orders\Derived Columns"
           TopLeft="519.999992251396,232.999996528029" />
         <NodeLayout
-          Size="134.943396226416,41.6603773584906"
-          Id="Package\Load Orders\Load staging"
-          TopLeft="334.999995008111,644.999990388751" />
+          Size="126.792452830189,41.6603773584906"
+          Id="Package\Load Orders\Load Facts"
+          TopLeft="739.99998897314,647.999990344047" />
         <EdgeLayout
           Id="Package\Load Orders.Paths[Salida de origen de OLE DB]"
           TopLeft="597.68867138492,189.660375153119">
@@ -2017,6 +2017,14 @@ where [refTable].[MethodID] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\Load Orders\Get Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Load Orders\Lookup Shipping Method">
     <Properties>
       <Property>
@@ -2040,19 +2048,6 @@ where [refTable].[MethodID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Orders\Load Facts">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Load Orders\Lookup Customer">
     <Properties>
       <Property>
@@ -2064,6 +2059,29 @@ where [refTable].[MethodID] = ?</property>
         <Name>UsedTableName</Name>
         <Value
           type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Orders\Lookup Book">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimBook]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -2099,38 +2117,20 @@ where [refTable].[MethodID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Orders\Get Orders">
+    design-time-name="Package\Load Orders\Load staging">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Orders\Lookup Book">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimBook]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Orders\Load staging">
+    design-time-name="Package\Load Orders\Load Facts">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

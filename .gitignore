@@ -16,3 +16,13 @@ Bookstore_ETL/obj/
 
 # ETL local environment variables file (do not commit)
 Bookstore_ETL/.env.local
+
+# SSDT Database Project artifacts (do not commit)
+Bookstore_DW/bin/
+Bookstore_DW/obj/
+Bookstore_OLTP/bin/
+Bookstore_OLTP/obj/
+*.jfm
+*.dbmdl
+*.publish.sql
+DeploymentReport_*.txt

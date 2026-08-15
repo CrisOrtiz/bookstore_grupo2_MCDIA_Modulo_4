@@ -1,0 +1,40 @@
+﻿** Aspectos destacados
+     Tablas que se volverán a crear con los datos migrados
+       [staging].[book]
+       [staging].[order]
+     Índices clúster que se van a quitar
+       Ninguno
+     Índices clúster que se van a crear
+       Ninguno
+     Posibles incidencias de datos
+       Se está quitando la columna [staging].[order].[book_id]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[customer_id]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[line_id]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[order_date]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[order_id]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[price]; puede que se pierdan datos.
+       Se está quitando la columna [staging].[order].[shipping_method_id]; puede que se pierdan datos.
+
+** Acciones del usuario
+     Quitar
+       restricción sin nombre en [staging].[book] (Restricción DEFAULT)
+       restricción sin nombre en [staging].[order] (Restricción DEFAULT)
+     Volver a crear la tabla
+       [staging].[book] (Tabla)
+       [staging].[order] (Tabla)
+     Modificar
+       [dbo].[LoadFactOrders] (Procedimiento)
+
+** Acciones de compatibilidad
+     Actualizar
+       [dbo].[LoadDimBook] (Procedimiento)
+       [dbo].[LoadBookstoreDW] (Procedimiento)
+
+Se está quitando la columna [staging].[order].[book_id]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[customer_id]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[line_id]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[order_date]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[order_id]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[price]; puede que se pierdan datos.
+Se está quitando la columna [staging].[order].[shipping_method_id]; puede que se pierdan datos.
+

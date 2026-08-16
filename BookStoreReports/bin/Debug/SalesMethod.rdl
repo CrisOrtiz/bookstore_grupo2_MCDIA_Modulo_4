@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.9.12105.275</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-08-16T00:34:31.4932025Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-08-16T16:28:46.6882827Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -54,6 +54,40 @@
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="MethodDS">
+      <Query>
+        <DataSourceName>BookStore</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>sp_GetShipMethod</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="MethodValue">
+          <DataField>MethodValue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MethodLabel">
+          <DataField>MethodLabel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="YearDS">
+      <Query>
+        <DataSourceName>BookStore</DataSourceName>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>sp_GetYears</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="YearValue">
+          <DataField>YearValue</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="YearLabel">
+          <DataField>YearLabel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -63,18 +97,18 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.68815cm</Width>
+                  <Width>4.84597cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.68815cm</Width>
+                  <Width>4.82834cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.68815cm</Width>
+                  <Width>4.84597cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.74993cm</Height>
+                  <Height>0.68819cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -182,7 +216,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.74993cm</Height>
+                  <Height>0.68819cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -298,10 +332,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>BookStoreDS</DataSetName>
-            <Top>1.75189cm</Top>
-            <Left>5.26203cm</Left>
-            <Height>1.49986cm</Height>
-            <Width>8.06444cm</Width>
+            <Top>0.64064cm</Top>
+            <Left>0.42897cm</Left>
+            <Height>1.37639cm</Height>
+            <Width>14.52028cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -328,11 +362,27 @@
   <ReportParameters>
     <ReportParameter Name="MethodName">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
       <Prompt>Method Name</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>MethodDS</DataSetName>
+          <ValueField>MethodValue</ValueField>
+          <LabelField>MethodLabel</LabelField>
+        </DataSetReference>
+      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="Year">
       <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
       <Prompt>Year</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>YearDS</DataSetName>
+          <ValueField>YearValue</ValueField>
+          <LabelField>YearLabel</LabelField>
+        </DataSetReference>
+      </ValidValues>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>

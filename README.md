@@ -7,9 +7,60 @@
 - Griselda Merino Herbas
 - Eberth Canaviri Calle
 - Cristhian Ortiz Mercado
+---
+Flujo del proyecto:
+<img width="2720" height="1280" alt="flujo_bookstore_grupo2" src="https://github.com/user-attachments/assets/b6afd108-0b1e-4bd1-88c2-03be9d322999" />
+
+
+---
+### Reporte POWER BI - Bookstore
+<img width="1222" height="675" alt="image" src="https://github.com/user-attachments/assets/8f557295-5831-45c3-abb7-65fd777b20d7" />
+
+### Ejecuciones:
+### Bookstore OLAB
+
+<img width="729" height="735" alt="image" src="https://github.com/user-attachments/assets/1a81756f-504e-4c85-a620-6315ae3b2af3" />
+
+
+### Bookstore ETL
+
+- Main
+
+<img width="954" height="388" alt="image" src="https://github.com/user-attachments/assets/1b24bca8-718b-45a9-8fce-b6e0b6b1641e" />
+
+- Book
+
+<img width="317" height="553" alt="image" src="https://github.com/user-attachments/assets/e26b3df9-ebea-4d50-9540-59ca8ac54559" />
+
+- Customer
+
+<img width="348" height="629" alt="image" src="https://github.com/user-attachments/assets/db6a5d51-338c-44a3-aeff-1778f32e3dcb" />
+
+- Shipping Method
+
+<img width="416" height="607" alt="image" src="https://github.com/user-attachments/assets/6397fea6-c2ff-4c3f-a2ae-0b9614868596" />
+
+- Fact Orders
+
+<img width="387" height="621" alt="image" src="https://github.com/user-attachments/assets/92eab619-7641-4346-97e0-7719845fd621" />
+
+
+### Bookstore DW
+
+<img width="633" height="139" alt="image" src="https://github.com/user-attachments/assets/31aaa7f4-0167-4119-89aa-9ee1fa2f0c9e" />
+
+<img width="1352" height="982" alt="image" src="https://github.com/user-attachments/assets/3701f8fe-12c5-4dd0-ae76-1be59ae451dd" />
+
+
+### Bookstore OLTP
+
+<img width="576" height="152" alt="image" src="https://github.com/user-attachments/assets/a60f3118-b84a-4a86-b715-a0f1baea8faf" />
+
+<img width="1302" height="824" alt="image" src="https://github.com/user-attachments/assets/465d8f5a-076b-4cc8-b256-592c1895e4ec" />
 
 ---
 
+# INSTALACIÓN
 ## Requisitos Previos
 
 Antes de empezar, asegúrate de tener instalado:

@@ -1,0 +1,8 @@
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\bin\Model.asdatabase
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\bin\Model.deploymenttargets
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\bin\Model.deploymentoptions
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\obj\Development\BookStoreOLAP_v3.smproj.AssemblyReference.cache
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\obj\Development\BookStoreOLAP_v3.smproj.CoreCompileInputs.cache
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\obj\Development\Model.asdatabase
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\obj\Development\Model.deploymentoptions
+D:\SOE\MCDIA\M05\Practica_Grupal\BookStoreOLAP_v3\BookStoreOLAP_v3\obj\Development\Model.deploymenttargets

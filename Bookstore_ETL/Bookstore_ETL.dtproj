@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">CRISPC</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAa74+28f2DEy3MLdSK+G/ygAAAAACAAAAAAAQZgAAAAEAACAAAAAM74tWq+CqV3xR97GxZI4m85mb6Tsk/eIE6jtpiOutQwAAAAAOgAAAAAIAACAAAACV83jDn6dMzxuM5aiOubbx0CN7Hn1N6oiiOyCL9dw8ppAAAAAFIANb8wFNzBJD83S/lvwkF3kQF6f7RWHnuDquht6Q/kzk5fbw+bzEihpFhDNTI0oJCyFk1LxHSqEstmkc5oHLoknObtSi3sURVyqaMdKXTIPseqrSkPuDhFXy0Y5BZfjpjhZUfUP5hP7K8lgVNZ4BQc/ykPXEUONfdfKrgk3TTY5Xe8jG3u/8je86c5N4hlVAAAAAtEmjrm+ayx/qOcIgssGJYy2uAQc+J9hkqIcs3MSNiFwPa/pHElSGOAtiRL/Qa2fKSfsxKKgiPzi7mbYjYnl0tw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA7QMYyze9QE+Nr30mIOtCowAAAAACAAAAAAAQZgAAAAEAACAAAADXD+xvxx6ycqOYLyEXet9E8eX6NIPoc8439Y6KGlfIrwAAAAAOgAAAAAIAACAAAADE01R+K9Fr4sUY5EznoOLJ4+8iUp2rLjjvhdcdtsg7ZpAAAAACS/493LA3YxHEClfw6JUsi711aJLe4Xy+0LEVHmWVKLEvYxdYmSiGHPghXT0enOAdaK0HoyZDhmxuzgKqju67ctoTXWUNErwgAI1NR96P2F2dpHWXw9PZBecfJT6NLiImZN1fVq+M5SQfa05n2FawwA3yTxLtRcXGPPCie/3jNeZ8aXNe7eKrLJecpndB/6ZAAAAA72W8iwq2OPCFzxstbB79ZvDdd8iKi2S4ewdVukmMChInnXIWlX6Hwdpexa9gOJlrIOWRB6u39QcEq9VltUp77w==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -37,12 +37,12 @@
           <SSIS:Package SSIS:Name="FactOrders.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
-          <SSIS:ConnectionManager SSIS:Name="cmDW.conmgr" />
-          <SSIS:ConnectionManager SSIS:Name="cmOLTP.conmgr" />
+          <SSIS:ConnectionManager SSIS:Name="BookStore_DW.conmgr" />
+          <SSIS:ConnectionManager SSIS:Name="BookStore_OLTP.conmgr" />
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectByProxy">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.ConnectByProxy">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -57,7 +57,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectionString">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.ConnectionString">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -68,11 +68,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=CrisPC;Initial Catalog=Bookstore_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{61384584-DB61-469B-A6E9-DC2D2FF6A084}Bookstore_DW;Auto Translate=False;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=FLDSMDFR;Initial Catalog=BookStore_DW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-{61384584-DB61-469B-A6E9-DC2D2FF6A084}Bookstore_DW;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectRetryCount">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.ConnectRetryCount">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -87,7 +87,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectRetryInterval">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.ConnectRetryInterval">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -102,7 +102,7 @@
                 <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ConnectUsingManagedIdentity">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.ConnectUsingManagedIdentity">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -117,7 +117,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.InitialCatalog">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.InitialCatalog">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -128,11 +128,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Bookstore_DW</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">BookStore_DW</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.Password">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.Password">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -146,7 +146,7 @@
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.RetainSameConnection">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.RetainSameConnection">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -161,7 +161,7 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.ServerName">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.ServerName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -172,11 +172,11 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">CrisPC</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">FLDSMDFR</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.Bookstore_DW.UserName">
+            <SSIS:Parameter SSIS:Name="CM.BookStore_DW.UserName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
                 </SSIS:Property>
@@ -216,7 +216,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=CrisPC;Initial Catalog=Bookstore_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Bookstore_ETL-{57C269E3-4DD7-4032-A3FC-C87B62EA6030}Bookstore_OLTP;Auto Translate=False;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=FLDSMDFR;Initial Catalog=BookStore_OLTP;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-{57C269E3-4DD7-4032-A3FC-C87B62EA6030}Bookstore_OLTP;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -276,7 +276,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Bookstore_OLTP</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">BookStore_OLTP</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -320,7 +320,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">CrisPC</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">FLDSMDFR</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>

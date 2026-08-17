@@ -1,0 +1,498 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "FLDSMDFR ",
+        "connectionString": "Provider=SQLOLEDB;Data Source=FLDSMDFR;Initial Catalog=BookStore_DW;User ID=sa;Persist Security Info=true",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "DimBook",
+        "columns": [
+          {
+            "name": "BookKey",
+            "dataType": "int64",
+            "sourceColumn": "BookKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "BookID",
+            "dataType": "int64",
+            "sourceColumn": "BookID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ISBN13",
+            "dataType": "string",
+            "sourceColumn": "ISBN13",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "NumPages",
+            "dataType": "int64",
+            "sourceColumn": "NumPages",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "PublicationDate",
+            "dataType": "string",
+            "sourceColumn": "PublicationDate",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "LanguageCode",
+            "dataType": "string",
+            "sourceColumn": "LanguageCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "LanguageName",
+            "dataType": "string",
+            "sourceColumn": "LanguageName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "PublisherName",
+            "dataType": "string",
+            "sourceColumn": "PublisherName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "AuthorName",
+            "dataType": "string",
+            "sourceColumn": "AuthorName",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimBook",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[DimBook].*   FROM [dbo].[DimBook] ",
+              "dataSource": "FLDSMDFR "
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[DimBook].*   FROM [dbo].[DimBook] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimBook"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "DimCustomer",
+        "columns": [
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CustomerID",
+            "dataType": "int64",
+            "sourceColumn": "CustomerID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "FullName",
+            "dataType": "string",
+            "sourceColumn": "FullName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "StreetNumber",
+            "dataType": "string",
+            "sourceColumn": "StreetNumber",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "StreetName",
+            "dataType": "string",
+            "sourceColumn": "StreetName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "AddressStatus",
+            "dataType": "string",
+            "sourceColumn": "AddressStatus",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "CountryName",
+            "dataType": "string",
+            "sourceColumn": "CountryName",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimCustomer",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[DimCustomer].*   FROM [dbo].[DimCustomer] ",
+              "dataSource": "FLDSMDFR "
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[DimCustomer].*   FROM [dbo].[DimCustomer] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimCustomer"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "DimDate",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FullDate",
+            "dataType": "string",
+            "sourceColumn": "FullDate",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "DayOfWeek",
+            "dataType": "int64",
+            "sourceColumn": "DayOfWeek",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "DayName",
+            "dataType": "string",
+            "sourceColumn": "DayName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DayOfMonth",
+            "dataType": "int64",
+            "sourceColumn": "DayOfMonth",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "DayOfYear",
+            "dataType": "int64",
+            "sourceColumn": "DayOfYear",
+            "sourceProviderType": "SmallInt"
+          },
+          {
+            "name": "WeekOfYear",
+            "dataType": "int64",
+            "sourceColumn": "WeekOfYear",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "MonthNumber",
+            "dataType": "int64",
+            "sourceColumn": "MonthNumber",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "MonthName",
+            "dataType": "string",
+            "sourceColumn": "MonthName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "int64",
+            "sourceColumn": "Quarter",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year",
+            "sourceProviderType": "SmallInt"
+          },
+          {
+            "name": "IsWeekend",
+            "dataType": "boolean",
+            "sourceColumn": "IsWeekend",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "Boolean"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimDate",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[DimDate].*   FROM [dbo].[DimDate] ",
+              "dataSource": "FLDSMDFR "
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[DimDate].*   FROM [dbo].[DimDate] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimDate"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "DimShippingMethod",
+        "columns": [
+          {
+            "name": "ShippingMethodKey",
+            "dataType": "int64",
+            "sourceColumn": "ShippingMethodKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "MethodID",
+            "dataType": "int64",
+            "sourceColumn": "MethodID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "MethodName",
+            "dataType": "string",
+            "sourceColumn": "MethodName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Cost",
+            "dataType": "double",
+            "sourceColumn": "Cost",
+            "sourceProviderType": "Numeric"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimShippingMethod",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[DimShippingMethod].*   FROM [dbo].[DimShippingMethod] ",
+              "dataSource": "FLDSMDFR "
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[DimShippingMethod].*   FROM [dbo].[DimShippingMethod] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimShippingMethod"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "FactOrders",
+        "columns": [
+          {
+            "name": "FactOrdersKey",
+            "dataType": "int64",
+            "sourceColumn": "FactOrdersKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "OrderID",
+            "dataType": "int64",
+            "sourceColumn": "OrderID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "LineID",
+            "dataType": "int64",
+            "sourceColumn": "LineID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "sourceColumn": "OrderDateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "BookKey",
+            "dataType": "int64",
+            "sourceColumn": "BookKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ShippingMethodKey",
+            "dataType": "int64",
+            "sourceColumn": "ShippingMethodKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Quantity",
+            "dataType": "int64",
+            "sourceColumn": "Quantity",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "UnitPrice",
+            "dataType": "double",
+            "sourceColumn": "UnitPrice",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "LineAmount",
+            "dataType": "double",
+            "sourceColumn": "LineAmount",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "ShippingCost",
+            "dataType": "double",
+            "sourceColumn": "ShippingCost",
+            "sourceProviderType": "Numeric"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FactOrders",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[FactOrders].*   FROM [dbo].[FactOrders] ",
+              "dataSource": "FLDSMDFR "
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[FactOrders].*   FROM [dbo].[FactOrders] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "FactOrders"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "3630f133-b3b0-43ad-a9de-8fa3a071f76a",
+        "fromTable": "FactOrders",
+        "fromColumn": "BookKey",
+        "toTable": "DimBook",
+        "toColumn": "BookKey"
+      },
+      {
+        "name": "c1da779a-3e54-40ba-bea7-ed960621e401",
+        "fromTable": "FactOrders",
+        "fromColumn": "CustomerKey",
+        "toTable": "DimCustomer",
+        "toColumn": "CustomerKey"
+      },
+      {
+        "name": "acb18ddc-fec6-460a-84eb-27974bf23417",
+        "fromTable": "FactOrders",
+        "fromColumn": "OrderDateKey",
+        "toTable": "DimDate",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "edf1745d-9824-41ee-859a-bb149ec77bf6",
+        "fromTable": "FactOrders",
+        "fromColumn": "ShippingMethodKey",
+        "toTable": "DimShippingMethod",
+        "toColumn": "ShippingMethodKey"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

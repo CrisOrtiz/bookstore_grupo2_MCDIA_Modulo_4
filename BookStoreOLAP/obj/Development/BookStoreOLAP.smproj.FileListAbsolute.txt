@@ -1,0 +1,8 @@
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\bin\BookStoreOLAP.asdatabase
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\bin\BookStoreOLAP.deploymenttargets
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\bin\BookStoreOLAP.deploymentoptions
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\obj\Development\BookStoreOLAP.smproj.AssemblyReference.cache
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\obj\Development\BookStoreOLAP.smproj.CoreCompileInputs.cache
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\obj\Development\BookStoreOLAP.asdatabase
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\obj\Development\BookStoreOLAP.deploymentoptions
+C:\Griselda\bookstore_grupo2_MCDIA_Modulo_4\BookStoreOLAP\obj\Development\BookStoreOLAP.deploymenttargets

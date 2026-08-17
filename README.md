@@ -9,8 +9,7 @@
 - Cristhian Ortiz Mercado
 ---
 Flujo del proyecto:
-<img width="2720" height="1280" alt="flujo_bookstore_grupo2" src="https://github.com/user-attachments/assets/b6afd108-0b1e-4bd1-88c2-03be9d322999" />
-
+<img width="764" height="360" alt="image" src="https://github.com/user-attachments/assets/37d1fdeb-9581-4f81-b66e-3a8ccd02bd3a" />
 
 ---
 ### Reporte POWER BI - Bookstore

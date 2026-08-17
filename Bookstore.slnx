@@ -3,9 +3,17 @@
     <BuildType Name="Debug" />
     <BuildType Name="Development" />
     <BuildType Name="Release" />
+    <Platform Name="Any CPU" />
+    <Platform Name="x86" />
   </Configurations>
+  <Project Path="BookstoreOLAP/Bookstore_OLAP.smproj" Type="6870e480-7721-4708-bfb8-9ae898aa21b3" Id="8ce414bb-95b2-4c99-9e03-51ba72086e22">
+    <BuildType Project="Development" />
+    <Platform Project="x86" />
+    <Deploy />
+  </Project>
   <Project Path="Bookstore_DW/Bookstore_DW.sqlproj" Id="c3688565-f394-402f-aac9-23732fc0cd14">
     <BuildType Solution="Development|*" Project="Release" />
+    <Platform Project="AnyCPU" />
     <Build />
     <Deploy />
   </Project>
@@ -15,6 +23,7 @@
   </Project>
   <Project Path="Bookstore_OLTP/Bookstore.sqlproj" Id="4c082165-b022-4195-bc85-613188fe2d72">
     <BuildType Solution="Development|*" Project="Release" />
+    <Platform Project="AnyCPU" />
     <Build />
     <Deploy />
   </Project>

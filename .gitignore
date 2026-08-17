@@ -26,3 +26,7 @@ Bookstore_OLTP/obj/
 *.dbmdl
 *.publish.sql
 DeploymentReport_*.txt
+
+# OLAP generated artifacts (do not commit)
+Bookstore_OLAP/bin/
+Bookstore_OLAP/obj/
